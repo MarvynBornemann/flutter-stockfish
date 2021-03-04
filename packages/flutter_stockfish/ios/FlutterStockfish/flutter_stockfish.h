@@ -8,6 +8,8 @@ char * stockfish_trace_eval();
 
 char * stockfish_uci(char *);
 
+void stockfish_dispose(void);
+
 #ifdef __cplusplus
 }
 #endif
