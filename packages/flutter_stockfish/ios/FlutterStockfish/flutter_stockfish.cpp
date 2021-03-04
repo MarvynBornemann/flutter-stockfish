@@ -34,7 +34,7 @@ void stockfish_init(void) {
 	std::cout.rdbuf(buffer.rdbuf());
 }
 
-char * stockfish_trace_eval() {
+char * stockfish_get_output_buffer() {
 	//get output buffer
 	char * output = strdup(buffer.str().c_str());
 	buffer.str(std::string()); //clear buffer
@@ -52,7 +52,6 @@ char * stockfish_uci(char *command) {
 	buffer.str(std::string()); //clear buffer
 
 	return output;
-
 }
 
 void stockfish_dispose(void){

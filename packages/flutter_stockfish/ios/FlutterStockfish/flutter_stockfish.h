@@ -4,7 +4,7 @@ extern "C" {
 
 void stockfish_init(void);
 
-char * stockfish_trace_eval();
+char * stockfish_get_output_buffer();
 
 char * stockfish_uci(char *);
 
