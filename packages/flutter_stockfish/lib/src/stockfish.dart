@@ -40,9 +40,9 @@ final void Function() _initNative =
     _lib.lookup<NativeFunction<Void Function()>>('stockfish_init').asFunction();
 
 Future<String> _getOutputBufferCallback(Null _) async {
-  final pointer = _getOutputBufferNative();
-  final string = Utf8.fromUtf8(pointer);
-  free(pointer);
+  final Pointer<Utf8> pointer = _getOutputBufferNative();
+  final String string = pointer.toDartString();
+  calloc.free(pointer);
 
   return string;
 }
@@ -52,12 +52,12 @@ final Pointer<Utf8> Function() _getOutputBufferNative = _lib
     .asFunction();
 
 Future<String> _uciCallback(String command) async {
-  final commandPointer = Utf8.toUtf8(command);
+  final Pointer<Utf8> commandPointer = command.toNativeUtf8();
 
-  final resultPointer = _uciNative(commandPointer);
-  final result = Utf8.fromUtf8(resultPointer);
-  free(resultPointer);
-  free(commandPointer);
+  final Pointer<Utf8> resultPointer = _uciNative(commandPointer);
+  final String result = resultPointer.toDartString();
+  calloc.free(resultPointer);
+  calloc.free(commandPointer);
 
   return result;
 }
